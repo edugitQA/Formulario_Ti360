@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href='./LogoTI360.png''>
+    <title>FOMULÁRIO | TI360 </title>
+</head>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    width: 100%;
+    max-width: 600px; /* Define a largura máxima do formulário */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+
+@media (max-width: 800px) {
+    form {
+        max-width: 100%; 
+        padding: 10px; 
+    }
+}
+
+</style>
+<body>
+    <form id="myForm" onsubmit="return validateForm()">
+        <label for="firstName">Nome:</label>
+        <input type="text" id="firstName" name="firstName" required>
+        
+        <label for="lastName">Sobrenome:</label>
+        <input type="text" id="lastName" name="lastName" required>
+        
+        <label for="seniority">Senioridade:</label>
+        <select id="seniority" name="seniority" required>
+            <option value="">Selecione</option>
+            <option value="junior">Junior</option>
+            <option value="pleno">Pleno</option>
+            <option value="senior">Senior</option>
+        </select>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="question1">De qual lado da aplicação você desenvolve?:</label>
+        <div style="display: flex; flex-wrap: wrap;">
+            <label for="q1_option1"><input type="radio" id="q1_option1" name="question1" value="front-end" required> front-end</label>
+            <label for="q1_option2"><input type="radio" id="q1_option2" name="question1" value="back-end" required> back-end</label>
+            <label for="q1_option3"><input type="radio" id="q1_option3" name="question1" value="fullstack" required> fullstack</label>
+        </div>
+        
+        
+        <label for="question2">Selecione as tecnologias que utiliza:</label>
+        <div style="display: flex; flex-wrap: wrap;">
+            <label for="q2_option1"><input type="checkbox" id="q2_option1" name="question2" value="HTML" > HTML</label>
+            <label for="q2_option2"><input type="checkbox" id="q2_option2" name="question2" value="CSS" > CSS</label>
+            <label for="q2_option3"><input type="checkbox" id="q2_option3" name="question2" value="PHP" > PHP</label>
+            <label for="q2_option4"><input type="checkbox" id="q2_option4" name="question2" value="JavaScript" > JavaScript</label>
+            <label for="q2_option5"><input type="checkbox" id="q2_option5" name="question2" value="C#" > C#</label>
+            <label for="q2_option6"><input type="checkbox" id="q2_option6" name="question2" value="Python" > Python</label>
+            <label for="q2_option7"><input type="checkbox" id="q2_option7" name="question2" value="Java"> Java</label>
+        </div>
+        
+        
+        <label for="comments">Conte um pouca da sua experiência:</label>
+        <textarea id="comments" name="comments"></textarea>
+        
+        <button type="submit">Concluído</button>
+        <div id="formResults" style="display: none;">
+       
+        </div>
+    </form>
+   
+    <script>
+        function validateForm() {
+            var form = document.getElementById('myForm');
+            var firstName = form['firstName'].value.trim();
+            var lastName = form['lastName'].value.trim();
+            var seniority = form['seniority'].value.trim();
+            var email = form['email'].value.trim();
+            var question1 = form['question1'].value.trim();
+            var question2 = form['question2'].value.trim();
+            var comments = form['comments'].value.trim();
+
+            // Exibir os resultados na div
+            var resultsDiv = document.getElementById('formResults');
+            resultsDiv.innerHTML = `
+                <p><strong>Nome:</strong> ${firstName} ${lastName}</p>
+                <p><strong>Senioridade:</strong> ${seniority}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>De qual lado da aplicação você desenvolve?:</strong> ${question1}</p>
+                <p><strong>Selecione as tecnologias que utiliza:</strong> ${question2}</p>
+                <p><strong>Comentários:</strong> ${comments}</p>
+            `;
+
+
+            resultsDiv.style.display = 'block';
+
+         
+            return false;
+        }
+    </script>
+
+
+</body>
+</html>
