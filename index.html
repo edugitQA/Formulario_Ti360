@@ -108,38 +108,40 @@ button:hover {
         
         <button type="submit">Concluído</button>
         <div id="formResults" style="display: none;">
-       
         </div>
     </form>
    
     <script>
-        function validateForm() {
-            var form = document.getElementById('myForm');
-            var firstName = form['firstName'].value.trim();
-            var lastName = form['lastName'].value.trim();
-            var seniority = form['seniority'].value.trim();
-            var email = form['email'].value.trim();
-            var question1 = form['question1'].value.trim();
-            var question2 = form['question2'].value.trim();
-            var comments = form['comments'].value.trim();
+    function validateForm() {
+    var form = document.getElementById('myForm');
+    var firstName = form['firstName'].value.trim();
+    var lastName = form['lastName'].value.trim();
+    var seniority = form['seniority'].value.trim();
+    var email = form['email'].value.trim();
+    var question1 = form['question1'].value.trim();
+    var checkboxes = form.querySelectorAll('input[name="question2"]:checked');
+    var comments = form['comments'].value.trim();
 
-            // Exibir os resultados na div
-            var resultsDiv = document.getElementById('formResults');
-            resultsDiv.innerHTML = `
-                <p><strong>Nome:</strong> ${firstName} ${lastName}</p>
-                <p><strong>Senioridade:</strong> ${seniority}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>De qual lado da aplicação você desenvolve?:</strong> ${question1}</p>
-                <p><strong>Selecione as tecnologias que utiliza:</strong> ${question2}</p>
-                <p><strong>Comentários:</strong> ${comments}</p>
-            `;
+    // Exibir os resultados na div
+    var resultsDiv = document.getElementById('formResults');
+    var technologies = Array.from(checkboxes).map(function(checkbox) {
+        return checkbox.value;
+    }).join(', ');
 
+    resultsDiv.innerHTML = `
+        <p><strong>Nome:</strong> ${firstName} ${lastName}</p>
+        <p><strong>Senioridade:</strong> ${seniority}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>De qual lado da aplicação você desenvolve?:</strong> ${question1}</p>
+        <p><strong>Selecione as tecnologias que utiliza:</strong> ${technologies}</p>
+        <p><strong>Comentários:</strong> ${comments}</p>
+    `;
 
-            resultsDiv.style.display = 'block';
+    resultsDiv.style.display = 'block';
 
-         
-            return false;
-        }
+    return false;
+}
+
     </script>
 
 
