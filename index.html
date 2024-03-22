@@ -122,25 +122,35 @@ button:hover {
     var checkboxes = form.querySelectorAll('input[name="question2"]:checked');
     var comments = form['comments'].value.trim();
 
-    // Exibir os resultados na div
-    var resultsDiv = document.getElementById('formResults');
-    var technologies = Array.from(checkboxes).map(function(checkbox) {
-        return checkbox.value;
-    }).join(', ');
+    // Verifica se todos os campos obrigatórios estão preenchidos
+    if (firstName !== '' && lastName !== '' && seniority !== '' && email !== '' && question1 !== '' && checkboxes.length > 0) {
+        var resultsDiv = document.getElementById('formResults');
+        var technologies = Array.from(checkboxes).map(function(checkbox) {
+            return checkbox.value;
+        }).join(', ');
 
-    resultsDiv.innerHTML = `
-        <p><strong>Nome:</strong> ${firstName} ${lastName}</p>
-        <p><strong>Senioridade:</strong> ${seniority}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>De qual lado da aplicação você desenvolve?:</strong> ${question1}</p>
-        <p><strong>Selecione as tecnologias que utiliza:</strong> ${technologies}</p>
-        <p><strong>Comentários:</strong> ${comments}</p>
-    `;
+        resultsDiv.innerHTML = `
+            <p><strong>Nome:</strong> ${firstName} ${lastName}</p>
+            <p><strong>Senioridade:</strong> ${seniority}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>De qual lado da aplicação você desenvolve?:</strong> ${question1}</p>
+            <p><strong>Selecione as tecnologias que utiliza:</strong> ${technologies}</p>
+            <p><strong>Comentários:</strong> ${comments}</p>
+        `;
 
-    resultsDiv.style.display = 'block';
+        resultsDiv.style.display = 'block';
 
+        // Mostra o alerta de cadastro realizado com sucesso
+        alert('Cadastro realizado com sucesso!');
+    } else {
+        // Exibe um alerta indicando que todos os campos obrigatórios devem ser preenchidos
+        alert('Por favor, preencha todos os campos obrigatórios.');
+    }
+
+    // Retorna false para evitar o envio do formulário
     return false;
 }
+
 
     </script>
 
