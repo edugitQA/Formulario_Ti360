@@ -67,13 +67,13 @@ button:hover {
 <body>
     <form id="myForm" onsubmit="return validateForm()">
         <label for="firstName">Nome:</label>
-        <input type="text" id="firstName" name="firstName" required>
+        <input type="text" id="firstName" name="firstName" >
         
         <label for="lastName">Sobrenome:</label>
-        <input type="text" id="lastName" name="lastName" required>
+        <input type="text" id="lastName" name="lastName" >
         
         <label for="seniority">Senioridade:</label>
-        <select id="seniority" name="seniority" required>
+        <select id="seniority" name="seniority" >
             <option value="">Selecione</option>
             <option value="junior">Junior</option>
             <option value="pleno">Pleno</option>
@@ -81,13 +81,13 @@ button:hover {
         </select>
         
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" >
         
         <label for="question1">De qual lado da aplicação você desenvolve?:</label>
         <div style="display: flex; flex-wrap: wrap;">
-            <label for="q1_option1"><input type="radio" id="q1_option1" name="question1" value="front-end" required> front-end</label>
-            <label for="q1_option2"><input type="radio" id="q1_option2" name="question1" value="back-end" required> back-end</label>
-            <label for="q1_option3"><input type="radio" id="q1_option3" name="question1" value="fullstack" required> fullstack</label>
+            <label for="q1_option1"><input type="radio" id="q1_option1" name="question1" value="front-end" > front-end</label>
+            <label for="q1_option2"><input type="radio" id="q1_option2" name="question1" value="back-end" > back-end</label>
+            <label for="q1_option3"><input type="radio" id="q1_option3" name="question1" value="fullstack" > fullstack</label>
         </div>
         
         
@@ -112,7 +112,7 @@ button:hover {
     </form>
    
     <script>
-    function validateForm() {
+  function validateForm() {
     var form = document.getElementById('myForm');
     var firstName = form['firstName'].value.trim();
     var lastName = form['lastName'].value.trim();
@@ -121,6 +121,13 @@ button:hover {
     var question1 = form['question1'].value.trim();
     var checkboxes = form.querySelectorAll('input[name="question2"]:checked');
     var comments = form['comments'].value.trim();
+
+    // Verifica se pelo menos um campo obrigatório está preenchido
+    if (firstName === '' && lastName === '' && seniority === '' && email === '' && question1 === '' && checkboxes.length === 0) {
+        // Exibe um alerta indicando que pelo menos um campo obrigatório deve ser preenchido
+        alert('Preencha os campos obrigatórios.');
+        return false;
+    }
 
     // Verifica se todos os campos obrigatórios estão preenchidos
     if (firstName !== '' && lastName !== '' && seniority !== '' && email !== '' && question1 !== '' && checkboxes.length > 0) {
